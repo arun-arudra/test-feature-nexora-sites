@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 220" fill="none" role="img" aria-label="Nexora Sites">
+  <!-- Oversized footer wordmark — replace this file anytime to swap branding -->
+  <text
+    x="0"
+    y="170"
+    fill="#F6F1E8"
+    font-family="system-ui, -apple-system, BlinkMacSystemFont, sans-serif"
+    font-size="168"
+    font-weight="700"
+    letter-spacing="-8"
+  >Nexora</text>
+</svg>

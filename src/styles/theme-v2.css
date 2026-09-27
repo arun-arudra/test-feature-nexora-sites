@@ -1,0 +1,375 @@
+/* V2 theme — Premier-inspired tokens (Nexora content, not a copy) */
+.theme-v2 {
+  --color-primary: #4600bb;
+  --color-primary-hover: #3a0099;
+  --color-primary-soft: rgba(70, 0, 187, 0.18);
+  --color-primary-mid: #6b33c9;
+
+  --color-accent: #6b33c9;
+  --color-accent-hover: #8247e0;
+  --color-accent-soft: rgba(107, 51, 201, 0.2);
+  --color-accent-foreground: #ffffff;
+
+  --color-bg: #000000;
+  --color-surface: #171717;
+  --color-surface-muted: #121212;
+  --color-text: #ffffff;
+  --color-muted: #949494;
+  --color-border: #3e3e3e;
+
+  --color-dark: #000000;
+  --color-dark-text: #ffffff;
+
+  --color-soft-dark: #0a0a0a;
+  --color-soft-dark-mid: #171717;
+  --color-soft-dark-deep: #050505;
+
+  --color-neon: #6b33c9;
+  --color-neon-mid: #936aa7;
+  --color-neon-deep: #4600bb;
+  --color-neon-rgb: 107, 51, 201;
+
+  --color-ink: #000000;
+  --color-ink-elevated: #171717;
+  --color-light: #e4e7f2;
+  --color-light-text: #0a0a0a;
+  --color-light-muted: #5c5c66;
+
+  --shadow-card: none;
+  --shadow-card-hover: none;
+  --shadow-cta: none;
+  --shadow-dark: none;
+  --glow-amber: 0 0 24px rgba(107, 51, 201, 0.35);
+  --glow-teal: 0 0 24px rgba(70, 0, 187, 0.35);
+  --glow-neon:
+    0 0 0 1px rgba(var(--color-neon-rgb), 0.4),
+    0 0 28px rgba(var(--color-neon-rgb), 0.4),
+    0 0 56px rgba(var(--color-neon-rgb), 0.2);
+  --neon-line: linear-gradient(
+    90deg,
+    #5400e9 0%,
+    #936aa7 55%,
+    transparent 100%
+  );
+
+  --v2-radius-btn: 10px;
+  --v2-radius-card: 12px;
+  --v2-space: 4px;
+
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-outfit), system-ui, sans-serif;
+  line-height: 1.5;
+  font-weight: 300;
+}
+
+.theme-v2 h1,
+.theme-v2 h2,
+.theme-v2 h3,
+.theme-v2 h4,
+.theme-v2 .font-heading {
+  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.theme-v2 .band-soft-dark,
+.theme-v2 .band-primary,
+.theme-v2 .band-ink {
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+.theme-v2 .band-cta {
+  background:
+    radial-gradient(60% 100% at 106% -10%, rgb(21, 0, 59) 0%, rgba(21, 0, 59, 0.27) 51%, transparent 99%),
+    radial-gradient(55% 100% at 0% 100%, rgba(255, 183, 98, 0.2) 0%, transparent 70%),
+    linear-gradient(180deg, #171717 0%, #000000 100%);
+}
+
+/* Light band — Premier Associations / Pricing feel (#E4E7F2) */
+.theme-v2 .v2-light {
+  background: var(--color-light);
+  color: var(--color-light-text);
+}
+
+.theme-v2 .v2-light h2,
+.theme-v2 .v2-light h3 {
+  color: var(--color-light-text);
+}
+
+.theme-v2 .v2-elevated {
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+.theme-v2 .v2-peach-violet {
+  background-image:
+    radial-gradient(60% 100% at 106% -10%, rgb(21, 0, 59) 0%, rgba(21, 0, 59, 0.27) 51%, transparent 99%),
+    radial-gradient(55% 100% at 0% 100%, rgba(255, 183, 98, 0.35) 0%, transparent 70%),
+    linear-gradient(180deg, #000000 0%, #0a0514 100%);
+}
+
+.theme-v2 .v2-violet-glow {
+  background-image: radial-gradient(
+    50% 50% at 50% 50%,
+    rgba(74, 0, 233, 0.55) 0%,
+    rgba(0, 0, 0, 0) 70%
+  );
+}
+
+.theme-v2 .v2-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: var(--v2-radius-btn);
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.3;
+  transition: background-color 0.2s ease, color 0.2s ease, opacity 0.2s ease;
+}
+
+.theme-v2 .v2-btn-primary {
+  background: var(--color-primary);
+  color: #ffffff;
+}
+
+.theme-v2 .v2-btn-primary:hover {
+  background: var(--color-primary-hover);
+}
+
+.theme-v2 .v2-btn-ghost {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(8px);
+}
+
+.theme-v2 .v2-btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.theme-v2 .v2-btn-dark {
+  background: #000000;
+  color: #ffffff;
+}
+
+.theme-v2 .v2-btn-dark:hover {
+  background: #1a1a1a;
+}
+
+.theme-v2 .v2-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--v2-radius-card);
+  padding: 24px;
+}
+
+/* Light cards on dark sections (Premier feature panels) */
+.theme-v2 .v2-card-on-dark {
+  background: var(--color-light);
+  color: var(--color-light-text);
+  border: 1px solid transparent;
+  border-radius: var(--v2-radius-card);
+  padding: 24px;
+}
+
+.theme-v2 .v2-card-on-light {
+  background: #ffffff;
+  color: var(--color-light-text);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: var(--v2-radius-card);
+  padding: 24px;
+}
+
+.theme-v2 .neon-line {
+  background: var(--neon-line);
+  box-shadow: 0 0 14px rgba(84, 0, 233, 0.55);
+}
+
+.theme-v2 #quote input,
+.theme-v2 #quote select,
+.theme-v2 #quote textarea {
+  background: #0a0a0a;
+  border-color: #3e3e3e;
+  color: #ffffff;
+}
+
+.theme-v2 #quote input::placeholder,
+.theme-v2 #quote textarea::placeholder {
+  color: #949494;
+}
+
+.theme-v2 #quote label {
+  color: #ffffff;
+}
+
+/* ── Visuvate shimmer: ring mask keeps CENTER clear for icon/text ── */
+@property --v2-ring-mid {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 1%;
+}
+@property --v2-ring-peak {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 2%;
+}
+@property --v2-ring-soft {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 0;
+}
+@property --v2-ring-full {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 0;
+}
+
+.theme-v2 .v2-shimmer-mask {
+  --v2-ring-mid: 1%;
+  --v2-ring-peak: 2%;
+  --v2-ring-soft: 0;
+  --v2-ring-full: 0;
+  -webkit-mask: radial-gradient(
+    115% 150% at 50% 50%,
+    #0000 0%,
+    rgba(0, 0, 0, var(--v2-ring-soft)) var(--v2-ring-mid),
+    rgba(0, 0, 0, var(--v2-ring-full)) var(--v2-ring-peak),
+    #0000 100%
+  );
+  mask: radial-gradient(
+    115% 150% at 50% 50%,
+    #0000 0%,
+    rgba(0, 0, 0, var(--v2-ring-soft)) var(--v2-ring-mid),
+    rgba(0, 0, 0, var(--v2-ring-full)) var(--v2-ring-peak),
+    #0000 100%
+  );
+  transition:
+    --v2-ring-mid 0.9s ease,
+    --v2-ring-peak 0.9s ease,
+    --v2-ring-soft 0.9s ease,
+    --v2-ring-full 0.9s ease;
+}
+
+.theme-v2 .v2-shimmer-mask.is-active {
+  /* Larger clear center so icon + title sit on solid card bg */
+  --v2-ring-mid: 52%;
+  --v2-ring-peak: 72%;
+  --v2-ring-soft: 0.18;
+  --v2-ring-full: 1;
+}
+
+.theme-v2 .v2-shimmer {
+  -webkit-mask-mode: luminance;
+  mask-mode: luminance;
+  -webkit-mask-size: 300% 100%;
+  mask-size: 300% 100%;
+  -webkit-mask-repeat: repeat-x;
+  mask-repeat: repeat-x;
+  will-change: mask-position;
+  animation-name: v2-shimmer-drift;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-play-state: paused;
+}
+
+.theme-v2 .v2-shimmer.is-running {
+  animation-play-state: running;
+}
+
+@keyframes v2-shimmer-drift {
+  from {
+    -webkit-mask-position: 0 0;
+    mask-position: 0 0;
+  }
+  to {
+    -webkit-mask-position: -60% 0;
+    mask-position: -60% 0;
+  }
+}
+
+/* Visuvate-style dual conic border shines (brand violet) */
+@property --v2-shine-a {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@property --v2-shine-b {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 180deg;
+}
+
+.theme-v2 .v2-shine {
+  padding: 1px;
+  transition: opacity 0.35s ease;
+  background-image: conic-gradient(
+    from calc(var(--v2-shine-a) - var(--v2-shine-w, 24deg)),
+    transparent 0deg,
+    #6b33c9 calc(var(--v2-shine-w, 24deg) / 2),
+    #c4b0ff var(--v2-shine-w, 24deg),
+    transparent calc(var(--v2-shine-w, 24deg) * 2),
+    transparent 360deg
+  );
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  -webkit-mask-composite: xor;
+}
+
+.theme-v2 .v2-shine-b {
+  background-image: conic-gradient(
+    from calc(var(--v2-shine-b) - var(--v2-shine-w, 24deg)),
+    transparent 0deg,
+    #4600bb calc(var(--v2-shine-w, 24deg) / 2),
+    #936aa7 var(--v2-shine-w, 24deg),
+    transparent calc(var(--v2-shine-w, 24deg) * 2),
+    transparent 360deg
+  );
+}
+
+.theme-v2 .v2-shine-a {
+  animation: v2-shine-spin-a 2.8s linear infinite;
+}
+
+.theme-v2 .v2-shine-b {
+  animation: v2-shine-spin-b 2.8s linear infinite;
+}
+
+@keyframes v2-shine-spin-a {
+  from {
+    --v2-shine-a: 135deg;
+  }
+  to {
+    --v2-shine-a: 495deg;
+  }
+}
+
+@keyframes v2-shine-spin-b {
+  from {
+    --v2-shine-b: 315deg;
+  }
+  to {
+    --v2-shine-b: 675deg;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-v2 .v2-shimmer-mask {
+    transition: none;
+  }
+  .theme-v2 .v2-shimmer,
+  .theme-v2 .v2-shine-a,
+  .theme-v2 .v2-shine-b {
+    animation: none;
+  }
+}

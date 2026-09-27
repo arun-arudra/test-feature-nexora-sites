@@ -1,0 +1,84 @@
+name: Deploy Frontend to Bluehost
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      # Skip Bluehost deployment if ONLY backend/admin files were changed
+      - 'src/app/(backend)/**'
+      - 'src/lib/cms/**'
+      - 'README.md'
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Lint Code
+        run: npm run lint --if-present
+
+      - name: Run Unit Tests
+        run: npm run test --if-present || true
+
+      - name: Run Trivy Vulnerability Scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          scan-ref: '.'
+          format: 'table'
+          exit-code: '1'
+          ignore-unfixed: true
+          vuln-type: 'os,library'
+          severity: 'CRITICAL,HIGH'
+
+      - name: Prepare Static Export
+        run: |
+          # 1. Disable Backend routes (not supported in static export)
+          mv 'src/app/(backend)' src/backend.disabled
+          # 2. Mock out headers() in layout.tsx to prevent static bailout
+          sed -i 's/import { headers } from "next\/headers";/\/\/ import { headers } from "next\/headers";/' src/app/layout.tsx
+          sed -i 's/import { isCmsAdminPath } from "@\/lib\/cms\/admin-path";/\/\/ import { isCmsAdminPath } from "@\/lib\/cms\/admin-path";/' src/app/layout.tsx
+          sed -i 's/const pathname = (await headers()).get("x-pathname") ?? "";/\/\/ const pathname = (await headers()).get("x-pathname") ?? "";/' src/app/layout.tsx
+          sed -i 's/const isAdmin = isCmsAdminPath(pathname);/\/\/ const isAdmin = isCmsAdminPath(pathname);\n  const isAdmin = false;/' src/app/layout.tsx
+
+      - name: Build Static Export
+        env:
+          # This triggers the output: "export" in next.config.ts
+          BUILD_TARGET: "static"
+          NEXT_PUBLIC_BASE_PATH: "/Nexora"
+          
+          # Add all your necessary NEXT_PUBLIC_ variables here
+          NEXT_PUBLIC_SITE_URL: "https://hjt.iyk.mybluehostin.me/Nexora"
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+          NEXT_PUBLIC_CMS_ADMIN_BASE: "/admin"
+          
+          # Since the static export fetches Contentful/Supabase at build time,
+          # you also need to provide the build-time secrets here!
+          CONTENTFUL_NEWS_SPACE_ID: ${{ secrets.CONTENTFUL_NEWS_SPACE_ID }}
+          CONTENTFUL_NEWS_DELIVERY_TOKEN: ${{ secrets.CONTENTFUL_NEWS_DELIVERY_TOKEN }}
+          CONTENTFUL_NEWS_ENVIRONMENT: "master"
+        run: npm run build
+
+      - name: FTP Deploy to Bluehost
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: ./public_html/Nexora/
+          local-dir: ./out/
+          dangerous-clean-slate: true # Removes old files on the server

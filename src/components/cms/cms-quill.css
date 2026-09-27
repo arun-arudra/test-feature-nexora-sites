@@ -1,0 +1,50 @@
+.cms-quill .ql-toolbar {
+  border: none !important;
+  border-bottom: 1px solid var(--color-border) !important;
+  background: #0a0a0a;
+}
+
+.cms-quill .ql-container {
+  border: none !important;
+  min-height: 420px;
+  font-size: 15px;
+}
+
+.cms-quill-dark .ql-toolbar,
+.cms-quill-dark .ql-container {
+  background: #0a0a0a;
+  color: #fff;
+}
+
+.cms-quill-dark .ql-stroke {
+  stroke: #949494;
+}
+
+.cms-quill-dark .ql-fill {
+  fill: #949494;
+}
+
+.cms-quill-dark .ql-picker {
+  color: #949494;
+}
+
+.cms-quill-dark .ql-editor {
+  color: #fff;
+  min-height: 380px;
+}
+
+.cms-quill-dark .ql-editor.ql-blank::before {
+  color: #5c5c66;
+  font-style: normal;
+}
+
+.cms-quill-light .ql-toolbar,
+.cms-quill-light .ql-container {
+  background: #f4f4f5;
+  color: #111;
+}
+
+.cms-quill-light .ql-editor {
+  color: #111;
+  min-height: 380px;
+}

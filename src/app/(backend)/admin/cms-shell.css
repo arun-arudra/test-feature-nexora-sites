@@ -1,0 +1,11 @@
+/* Ensure CMS shell uses Outfit heading when theme-v2 is applied */
+.cms-shell {
+  font-family: var(--font-outfit), var(--font-source-sans), system-ui, sans-serif;
+}
+
+.cms-shell .font-heading,
+.cms-shell h1,
+.cms-shell h2,
+.cms-shell h3 {
+  font-family: var(--font-outfit), system-ui, sans-serif;
+}

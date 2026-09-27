@@ -1,0 +1,324 @@
+@import "tailwindcss";
+
+:root {
+  /* Deep forest teal — brand anchor */
+  --color-primary: #0c3536;
+  --color-primary-hover: #082628;
+  --color-primary-soft: #e4efef;
+  --color-primary-mid: #1a5556;
+
+  /* Honey amber — CTA / spark */
+  --color-accent: #e4a01a;
+  --color-accent-hover: #c8870f;
+  --color-accent-soft: #fff4d9;
+  --color-accent-foreground: #1c1408;
+
+  /* Warm parchment field */
+  --color-bg: #f6f1e8;
+  --color-surface: #fffcf7;
+  --color-surface-muted: #ebe4d8;
+  --color-text: #15201f;
+  --color-muted: #5a635f;
+  --color-border: #ddd4c6;
+
+  /* Ink footer */
+  --color-dark: #07181c;
+  --color-dark-text: #f6f1e8;
+
+  /* Soft dark band — lifted teal, not pure black */
+  --color-soft-dark: #1a4345;
+  --color-soft-dark-mid: #245456;
+  --color-soft-dark-deep: #143638;
+
+  /*
+   * Neon system (Premier-style: thin gradient line + ambient blur dots).
+   * Change these hex / rgb values to retheme glows site-wide.
+   */
+  --color-neon: #e4a01a;
+  --color-neon-mid: #f5c84a;
+  --color-neon-deep: #c8870f;
+  --color-neon-rgb: 228, 160, 26;
+  --color-ink: #05080a;
+  --color-ink-elevated: #12181c;
+
+  --color-whatsapp: #22c55e;
+  --color-whatsapp-hover: #16a34a;
+  --color-coral: #c96b5c;
+
+  /* Shared effect tokens */
+  --shadow-card: 0 10px 28px rgba(12, 53, 54, 0.06);
+  --shadow-card-hover: 0 18px 44px rgba(12, 53, 54, 0.12);
+  --shadow-cta: 0 14px 36px rgba(228, 160, 26, 0.28);
+  --shadow-dark: 0 24px 60px rgba(7, 24, 28, 0.35);
+  --glow-amber: 0 0 0 1px rgba(228, 160, 26, 0.22), 0 12px 40px rgba(228, 160, 26, 0.18);
+  --glow-teal: 0 0 0 1px rgba(26, 85, 86, 0.18), 0 16px 48px rgba(12, 53, 54, 0.16);
+  --glow-neon:
+    0 0 0 1px rgba(var(--color-neon-rgb), 0.35),
+    0 0 28px rgba(var(--color-neon-rgb), 0.35),
+    0 0 56px rgba(var(--color-neon-rgb), 0.18);
+  --neon-line: linear-gradient(
+    90deg,
+    var(--color-neon) 0%,
+    var(--color-neon-mid) 55%,
+    transparent 100%
+  );
+}
+
+@theme inline {
+  --color-primary: var(--color-primary);
+  --color-primary-hover: var(--color-primary-hover);
+  --color-primary-soft: var(--color-primary-soft);
+  --color-primary-mid: var(--color-primary-mid);
+  --color-accent: var(--color-accent);
+  --color-accent-hover: var(--color-accent-hover);
+  --color-accent-soft: var(--color-accent-soft);
+  --color-accent-foreground: var(--color-accent-foreground);
+  --color-bg: var(--color-bg);
+  --color-surface: var(--color-surface);
+  --color-surface-muted: var(--color-surface-muted);
+  --color-text: var(--color-text);
+  --color-muted: var(--color-muted);
+  --color-border: var(--color-border);
+  --color-dark: var(--color-dark);
+  --color-dark-text: var(--color-dark-text);
+  --color-soft-dark: var(--color-soft-dark);
+  --color-soft-dark-mid: var(--color-soft-dark-mid);
+  --color-soft-dark-deep: var(--color-soft-dark-deep);
+  --color-neon: var(--color-neon);
+  --color-neon-mid: var(--color-neon-mid);
+  --color-neon-deep: var(--color-neon-deep);
+  --color-ink: var(--color-ink);
+  --color-ink-elevated: var(--color-ink-elevated);
+  --color-whatsapp: var(--color-whatsapp);
+  --color-whatsapp-hover: var(--color-whatsapp-hover);
+  --color-coral: var(--color-coral);
+  --font-sans: var(--font-source-sans);
+  --font-heading: var(--font-plus-jakarta);
+}
+
+* {
+  box-sizing: border-box;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-accent) transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-bg);
+  background-image:
+    radial-gradient(ellipse 80% 50% at 10% -10%, rgba(228, 160, 26, 0.09), transparent 55%),
+    radial-gradient(ellipse 70% 45% at 100% 0%, rgba(12, 53, 54, 0.07), transparent 50%),
+    linear-gradient(180deg, #f8f4ec 0%, var(--color-bg) 28%, var(--color-bg) 100%);
+  background-attachment: scroll;
+  color: var(--color-text);
+  font-family: var(--font-source-sans), system-ui, sans-serif;
+}
+
+@media (min-width: 1024px) {
+  body {
+    background-attachment: fixed;
+  }
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-plus-jakarta), system-ui, sans-serif;
+  letter-spacing: -0.02em;
+}
+
+::selection {
+  background: color-mix(in oklab, var(--color-accent) 42%, white);
+  color: var(--color-text);
+}
+
+/* Thin brand scrollbar (Firefox handled on * above) */
+
+/* Thin brand scrollbar (Chrome / Safari / Edge) */
+*::-webkit-scrollbar {
+  width: 3px;
+  height: 3px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--color-accent);
+  border-radius: 999px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--color-accent-hover);
+}
+
+*::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+
+@keyframes soft-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes sheen {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Atmosphere helpers */
+.atmosphere-warm {
+  background:
+    radial-gradient(circle at 88% 12%, rgba(228, 160, 26, 0.2), transparent 42%),
+    radial-gradient(circle at 8% 88%, rgba(12, 53, 54, 0.12), transparent 40%),
+    radial-gradient(circle at 50% 50%, rgba(255, 252, 247, 0.35), transparent 70%);
+}
+
+.atmosphere-muted {
+  background:
+    radial-gradient(circle at 20% 0%, rgba(228, 160, 26, 0.08), transparent 45%),
+    linear-gradient(180deg, color-mix(in oklab, var(--color-surface-muted) 70%, white), transparent);
+}
+
+.band-primary {
+  background:
+    radial-gradient(ellipse 70% 80% at 100% 0%, rgba(228, 160, 26, 0.18), transparent 50%),
+    radial-gradient(ellipse 60% 70% at 0% 100%, rgba(255, 255, 255, 0.08), transparent 45%),
+    linear-gradient(145deg, #0a2f30 0%, var(--color-primary) 45%, #134849 100%);
+}
+
+.band-soft-dark {
+  background-color: var(--color-soft-dark);
+  background-image:
+    radial-gradient(ellipse 65% 70% at 100% 0%, rgba(228, 160, 26, 0.14), transparent 48%),
+    radial-gradient(ellipse 55% 60% at 0% 100%, rgba(246, 241, 232, 0.06), transparent 50%),
+    linear-gradient(
+      155deg,
+      var(--color-soft-dark-deep) 0%,
+      var(--color-soft-dark) 48%,
+      var(--color-soft-dark-mid) 100%
+    );
+  color: var(--color-dark-text);
+}
+
+.band-cta {
+  background:
+    radial-gradient(ellipse 55% 70% at 0% 50%, rgba(228, 160, 26, 0.22), transparent 55%),
+    linear-gradient(135deg, #082628 0%, var(--color-primary) 55%, #1a5556 100%);
+}
+
+/* —— Neon design system (Premier-inspired placement) —— */
+
+.band-ink {
+  background: var(--color-ink);
+  color: var(--color-dark-text);
+}
+
+.neon-line {
+  display: block;
+  height: 1px;
+  width: 5rem;
+  background: var(--neon-line);
+  box-shadow: 0 0 12px rgba(var(--color-neon-rgb), 0.55);
+}
+
+.neon-dot {
+  pointer-events: none;
+  position: absolute;
+  border-radius: 9999px;
+  background: radial-gradient(
+    50% 50% at 50% 50%,
+    rgba(var(--color-neon-rgb), 0.55) 0%,
+    rgba(var(--color-neon-rgb), 0) 70%
+  );
+  filter: blur(2px);
+}
+
+.neon-dot-strong {
+  background: radial-gradient(
+    50% 50% at 50% 50%,
+    rgba(var(--color-neon-rgb), 0.85) 0%,
+    rgba(var(--color-neon-rgb), 0) 72%
+  );
+}
+
+.neon-glass {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(8px);
+  box-shadow: var(--glow-neon);
+}
+
+.neon-glass:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.text-link {
+  color: var(--color-primary);
+  font-weight: 600;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 3px;
+}
+
+.text-link:hover {
+  color: var(--color-primary-hover);
+  text-decoration-color: color-mix(in oklab, var(--color-accent) 70%, transparent);
+}
+
+.input-field {
+  width: 100%;
+  margin-top: 0.375rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  padding: 0.625rem 0.75rem;
+  font-size: 0.875rem;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.input-field:hover {
+  border-color: color-mix(in oklab, var(--color-primary) 28%, var(--color-border));
+}
+
+.input-field:focus {
+  border-color: transparent;
+  box-shadow: 0 0 0 2px var(--color-accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
