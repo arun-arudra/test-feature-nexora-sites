@@ -27,7 +27,7 @@ const body = Source_Sans_3({
 const outfit = Outfit({
   variable: "--font-outfit",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  // removed weights
 });
 
 export const metadata: Metadata = {
