@@ -12,6 +12,7 @@ import {
   Menu,
   Settings,
   X,
+  LayoutDashboard,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { BrandLogo } from "@/components/brand/BrandLogo";
@@ -22,7 +23,8 @@ import { cn } from "@/lib/utils";
 const STORAGE_KEY = "nexora-admin-sidebar-collapsed";
 
 const nav = [
-  { href: () => cmsPath(), label: "News", icon: FileText, match: "news" as const },
+  { href: () => cmsPath(), label: "Dashboard", icon: LayoutDashboard, match: "dashboard" as const },
+  { href: () => cmsPath("news"), label: "News", icon: FileText, match: "news" as const },
   {
     href: () => cmsPath("testimonials"),
     label: "Testimonials",
@@ -38,13 +40,12 @@ const nav = [
 ];
 
 function isNavActive(match: (typeof nav)[number]["match"], pathname: string) {
-  if (match === "testimonials") return pathname.includes("/testimonials");
-  if (match === "settings") return pathname.includes("/settings");
-  return (
-    pathname === cmsPath() ||
-    pathname === "/admin" ||
-    pathname.includes("/review")
-  );
+  const normalized = pathname.replace(/\/$/, "");
+  if (match === "testimonials") return normalized.includes("/testimonials");
+  if (match === "settings") return normalized.includes("/settings");
+  if (match === "news") return normalized.includes("/news");
+  // Dashboard is active only at exactly /admin
+  return normalized === cmsPath() || normalized === "/admin";
 }
 
 export function AdminShell({
@@ -176,7 +177,7 @@ export function AdminShell({
             onClick={signOut}
             title="Sign out"
             className={cn(
-              "flex w-full items-center rounded-[10px] text-sm text-muted transition hover:bg-white/5 hover:text-white",
+              "flex w-full items-center rounded-[10px] text-sm text-red-500 transition hover:bg-red-500/10",
               narrow ? "justify-center px-0 py-2.5" : "gap-2 px-3 py-2.5",
             )}
           >

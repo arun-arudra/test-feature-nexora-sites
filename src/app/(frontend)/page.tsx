@@ -13,11 +13,14 @@ export const metadata = createMetadata({
 
 /** Main homepage */
 export default async function HomePage() {
-  const [testimonials, news, projects] = await Promise.all([
-    getPublishedTestimonials(),
-    getNewsSummaries(8),
-    getProjectSummaries(8),
-  ]);
+  console.time("getPublishedTestimonials");
+  const pTestimonials = getPublishedTestimonials().finally(() => console.timeEnd("getPublishedTestimonials"));
+  console.time("getNewsSummaries");
+  const pNews = getNewsSummaries(8).finally(() => console.timeEnd("getNewsSummaries"));
+  console.time("getProjectSummaries");
+  const pProjects = getProjectSummaries(8).finally(() => console.timeEnd("getProjectSummaries"));
+
+  const [testimonials, news, projects] = await Promise.all([pTestimonials, pNews, pProjects]);
 
   return (
     <V2HomePage

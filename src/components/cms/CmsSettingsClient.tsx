@@ -4,6 +4,7 @@ import { FormEvent, useEffect, useState } from "react";
 import { Loader2, Lock, Mail } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import { getSupabaseEnv } from "@/lib/supabase/env";
+import { SiteSettingsForm } from "@/components/cms/SiteSettingsForm";
 
 export function CmsSettingsClient() {
   const configured = getSupabaseEnv().isConfigured;
@@ -241,6 +242,8 @@ export function CmsSettingsClient() {
             </button>
           </form>
         </section>
+        
+        <SiteSettingsForm />
     </div>
   );
 }

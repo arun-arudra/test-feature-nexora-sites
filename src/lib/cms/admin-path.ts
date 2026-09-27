@@ -28,5 +28,6 @@ export function isCmsAdminPath(pathname: string): boolean {
 }
 
 export function isCmsLoginPath(pathname: string): boolean {
-  return pathname === cmsPath("login") || pathname === "/admin/login";
+  const normalized = pathname.replace(/\/$/, "");
+  return normalized === cmsPath("login") || normalized === "/admin/login";
 }
