@@ -1,0 +1,9 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # 1. Automatically redirect /admin traffic to your secure Vercel backend!
+  RewriteRule ^admin(.*)$ https://nexsora-wine.vercel.app/admin$1 [R=301,L]
+
+  # 2. Tell Apache to use your beautiful custom Next.js 404 page
+  ErrorDocument 404 /Nexora/404.html
+</IfModule>
