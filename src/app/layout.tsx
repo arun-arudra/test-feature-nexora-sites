@@ -5,6 +5,7 @@ import { ChatbotWidget } from "@/components/chatbot/ChatbotWidget";
 import { AnalyticsBeacon } from "@/components/analytics/AnalyticsBeacon";
 import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
 import { StickyWhatsApp } from "@/components/layout/StickyWhatsApp";
+import { AsciiBranding } from "@/components/AsciiBranding";
 import { V2Footer } from "@/components/v2/V2Footer";
 import { V2Header } from "@/components/v2/V2Header";
 import { siteConfig } from "@/config/site";
@@ -77,6 +78,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="flex min-h-full flex-col antialiased">
         <GoogleAnalytics />
+        <AsciiBranding />
         {isAdmin ? (
           children
         ) : (

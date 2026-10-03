@@ -16,19 +16,19 @@ const options = {
       </p>
     ),
     [BLOCKS.HEADING_1]: (_: unknown, children: React.ReactNode) => (
-      <h2 className="mb-4 mt-8 font-heading text-2xl font-normal tracking-[-0.02em] text-white first:mt-0 sm:text-3xl">
+      <h2 className="mb-4 mt-8 font-heading text-[clamp(1.4rem,2.2vw,1.9rem)] font-normal tracking-[-0.02em] text-white first:mt-0 leading-[1.15]">
         {children}
       </h2>
     ),
     [BLOCKS.HEADING_2]: (_: unknown, children: React.ReactNode) => (
-      <h3 className="mb-3 mt-8 font-heading text-xl font-normal tracking-[-0.02em] text-white first:mt-0 sm:text-2xl">
+      <h2 className="mb-4 mt-8 font-heading text-[clamp(1.4rem,2.2vw,1.9rem)] font-normal tracking-[-0.02em] text-white first:mt-0 leading-[1.15]">
         {children}
-      </h3>
+      </h2>
     ),
     [BLOCKS.HEADING_3]: (_: unknown, children: React.ReactNode) => (
-      <h4 className="mb-3 mt-6 text-base font-normal uppercase tracking-[0.08em] text-white/80 first:mt-0">
+      <h3 className="mb-4 mt-8 text-[11px] font-normal uppercase tracking-[0.18em] text-primary first:mt-0">
         {children}
-      </h4>
+      </h3>
     ),
     [BLOCKS.UL_LIST]: (_: unknown, children: React.ReactNode) => (
       <ul className="mb-5 space-y-2 pl-0">{children}</ul>
@@ -37,7 +37,7 @@ const options = {
       <ol className="mb-5 space-y-2 pl-0 counter-reset-list">{children}</ol>
     ),
     [BLOCKS.LIST_ITEM]: (_: unknown, children: React.ReactNode) => (
-      <li className="flex gap-3 text-[1.0625rem] font-light leading-[1.7] text-muted">
+      <li className="flex gap-3 text-[1.0625rem] font-light leading-[1.7] text-muted sm:text-[1.125rem]">
         <span className="mt-[0.55em] h-1 w-1 shrink-0 rounded-full bg-primary" aria-hidden />
         <span>{children}</span>
       </li>
@@ -67,16 +67,25 @@ const options = {
 export function RichText({
   value,
   className,
+  prose = false,
 }: {
   value: Document | string | null | undefined;
   className?: string;
+  prose?: boolean;
 }) {
   if (!value) return null;
+
+  // We add a custom CSS class to enable the 3-col/9-col grid when prose=true
+  // This uses CSS grid where H2/H3 elements go into the left column (grid-column: 1)
+  // and all other elements go into the right column (grid-column: 2) on large screens.
+  const gridClasses = prose
+    ? "md:grid md:grid-cols-12 md:gap-x-12 lg:gap-x-16 md:[&>h2]:col-span-3 md:[&>h3]:col-span-3 md:[&>p]:col-start-4 md:[&>p]:col-span-9 md:[&>ul]:col-start-4 md:[&>ul]:col-span-9 md:[&>blockquote]:col-start-4 md:[&>blockquote]:col-span-9"
+    : "";
 
   if (typeof value === "string") {
     const paras = value.split(/\n{2,}/).map((p) => p.trim()).filter(Boolean);
     return (
-      <div className={cn("space-y-5", className)}>
+      <div className={cn("space-y-5", gridClasses, className)}>
         {paras.map((p) => (
           <p
             key={p.slice(0, 24)}
@@ -90,7 +99,7 @@ export function RichText({
   }
 
   return (
-    <div className={cn(className)}>
+    <div className={cn(gridClasses, className)}>
       {documentToReactComponents(value, options as never)}
     </div>
   );

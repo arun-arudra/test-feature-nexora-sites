@@ -47,8 +47,8 @@ function Block({ block, index }: { block: ProjectBlock; index: number }) {
 
     // No label: clean prose column (headings inside body act as section breaks)
     return (
-      <section className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-        <RichText value={block.body} />
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <RichText value={block.body} prose />
       </section>
     );
   }
