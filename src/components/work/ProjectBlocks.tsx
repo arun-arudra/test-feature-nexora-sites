@@ -18,21 +18,33 @@ export function ProjectBlocks({ blocks }: { blocks: ProjectBlock[] }) {
 function Block({ block, index }: { block: ProjectBlock; index: number }) {
   if (block.type === "text") {
     return (
-      <section className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-        {block.eyebrow ? (
-          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-primary">
-            {block.eyebrow}
-          </p>
-        ) : null}
-        {block.heading ? (
-          <h2 className="mb-5 font-heading text-3xl font-bold tracking-tight text-white sm:text-4xl">
-            {block.heading}
-          </h2>
-        ) : null}
-        <RichText value={block.body} />
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid gap-6 md:grid-cols-12 md:gap-12">
+          {/* Left: section heading */}
+          <div className="md:col-span-3">
+            {block.eyebrow && (
+              <p className="mb-2 text-[10px] font-normal uppercase tracking-[0.18em] text-primary">
+                {block.eyebrow}
+              </p>
+            )}
+            {block.heading && (
+              <h2 className="font-heading text-[clamp(1.4rem,2.2vw,1.9rem)] font-normal leading-[1.15] tracking-[-0.02em] text-white">
+                {block.heading}
+              </h2>
+            )}
+            {!block.heading && !block.eyebrow && null}
+            <span className="neon-line mt-4 block h-px w-10" aria-hidden />
+          </div>
+
+          {/* Right: body content */}
+          <div className="md:col-span-7 md:col-start-4">
+            <RichText value={block.body} />
+          </div>
+        </div>
       </section>
     );
   }
+
 
   if (block.type === "image") {
     return (
