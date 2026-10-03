@@ -1,10 +1,10 @@
 export const mainNav = [
   { href: "/", label: "Home" },
   { href: "/#services", label: "Services" },
-  { href: "/#process", label: "Process" },
   { href: "/#industries", label: "Industries" },
-  { href: "/work", label: "Work" },
+  { href: "/#process", label: "Process" },
   { href: "/#reviews", label: "Reviews" },
+  { href: "/work", label: "Work" },
   { href: "/news", label: "News" },
   { href: "/#faq", label: "FAQ" },
 ] as const;
