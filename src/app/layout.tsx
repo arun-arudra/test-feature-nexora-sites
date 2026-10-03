@@ -76,9 +76,11 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
       suppressHydrationWarning
       className={`${heading.variable} ${body.variable} ${outfit.variable} h-full`}
     >
+      <head>
+        <AsciiBranding />
+      </head>
       <body className="flex min-h-full flex-col antialiased">
         <GoogleAnalytics />
-        <AsciiBranding />
         {isAdmin ? (
           children
         ) : (

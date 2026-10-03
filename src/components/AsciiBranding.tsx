@@ -9,13 +9,10 @@ export async function AsciiBranding() {
     const text = fs.readFileSync(brandingPath, "utf8");
     if (!text.trim()) return null;
 
-    const asciiArt = `<!--\n${text}\n-->`;
+    const asciiArt = `\n/*\n${text}\n*/\n`;
 
     return (
-      <div
-        style={{ display: "none" }}
-        dangerouslySetInnerHTML={{ __html: asciiArt }}
-      />
+      <style dangerouslySetInnerHTML={{ __html: asciiArt }} />
     );
   } catch (e) {
     return null;
