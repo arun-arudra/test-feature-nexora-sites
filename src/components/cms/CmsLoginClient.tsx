@@ -105,126 +105,187 @@ export function CmsLoginClient() {
   }
 
   return (
-    <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-black p-4 text-white">
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(70,0,187,0.35),transparent_55%)]"
-      />
-      <div className="relative z-10 w-full max-w-md rounded-[12px] border border-border bg-surface p-8 shadow-2xl">
-        <div className="mb-6 flex justify-center">
-          <div className="flex h-12 w-12 items-center justify-center rounded-[10px] border border-border bg-black">
-            <LockKeyhole className="h-6 w-6 text-primary" />
+    <div className="flex min-h-screen w-full bg-black font-sans text-white">
+      {/* Left Panel - 50% */}
+      <div className="flex w-full flex-col md:w-1/2 relative z-10">
+        <div className="flex items-center justify-between px-6 py-6 lg:px-12">
+          <div className="flex items-center gap-2 font-heading font-bold text-xl tracking-tight">
+            <LockKeyhole className="h-5 w-5 text-primary" />
+            <span>Nexora CMS</span>
           </div>
         </div>
 
-        {!configured ? (
-          <p className="text-center text-sm text-muted">
-            Add Supabase env keys to enable CMS login.
-          </p>
-        ) : null}
-
-        {error ? (
-          <p className="mb-4 rounded-lg border border-red-500/30 bg-red-500/10 px-3 py-2 text-sm text-red-300">
-            {error}
-          </p>
-        ) : null}
-
-        {step === "login" ? (
-          <form onSubmit={handleLogin} className="space-y-4">
-            <div className="space-y-1 text-center">
-              <h1 className="font-heading text-2xl text-white">CMS Admin</h1>
-              <p className="text-sm text-muted">
-                Contentful + n8n publishing pipeline
+        <div className="flex flex-1 items-center justify-center px-4 py-12 sm:px-6 lg:px-20">
+          <div className="w-full max-w-[380px]">
+            {!configured ? (
+              <p className="mb-6 text-center text-sm text-red-400">
+                Configure NEXT_PUBLIC_SUPABASE_URL and ANON_KEY first.
               </p>
-            </div>
-            <label className="block text-xs text-muted">
-              Email
-              <input
-                type="email"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="mt-1 w-full rounded-[10px] border border-border bg-black px-3 py-2 text-sm text-white"
-                placeholder="admin@example.com"
-              />
-            </label>
-            <label className="block text-xs text-muted">
-              Password
-              <input
-                type="password"
-                required
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="mt-1 w-full rounded-[10px] border border-border bg-black px-3 py-2 text-sm text-white"
-              />
-            </label>
-            <button
-              type="submit"
-              disabled={loading}
-              className="inline-flex w-full items-center justify-center rounded-[10px] bg-primary px-4 py-2.5 text-sm font-medium text-white transition hover:bg-primary-hover disabled:opacity-60"
-            >
-              {loading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
-              Sign in
-            </button>
-          </form>
-        ) : null}
+            ) : null}
 
-        {step === "enroll" || step === "verify" ? (
-          <form onSubmit={handleVerifyOtp} className="space-y-4">
-            <div className="space-y-1 text-center">
-              <h1 className="font-heading text-2xl text-white">
-                {step === "enroll" ? "Set up MFA" : "Two-factor code"}
-              </h1>
-              <p className="text-sm text-muted">
-                {step === "enroll"
-                  ? "Scan the QR, then enter the 6-digit code."
-                  : "Enter the code from your authenticator app."}
+            {error ? (
+              <p className="mb-6 rounded-[10px] border border-red-500/30 bg-red-500/10 px-3 py-2 text-sm text-red-300">
+                {error}
               </p>
-            </div>
-            {step === "enroll" && qrCodeSvg ? (
-              <div className="flex flex-col items-center rounded-[12px] border border-border bg-black p-4">
-                <QrCode className="mb-3 h-5 w-5 text-muted" />
-                <div
-                  className="rounded-lg bg-white p-2"
-                  dangerouslySetInnerHTML={{ __html: qrCodeSvg }}
-                />
+            ) : null}
+
+            {step === "login" ? (
+              <div className="space-y-8">
+                <div>
+                  <h1 className="font-heading text-3xl font-bold tracking-tight text-white">
+                    Welcome back
+                  </h1>
+                  <p className="mt-2 text-sm text-muted">
+                    Sign in to your admin account to manage content.
+                  </p>
+                </div>
+
+                <form onSubmit={handleLogin} className="space-y-5">
+                  <div className="space-y-1">
+                    <label className="block text-xs font-medium text-muted uppercase tracking-wider">Email</label>
+                    <input
+                      type="email"
+                      required
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="block w-full rounded-[10px] border border-border bg-surface px-4 py-3 text-sm text-white focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary transition-colors"
+                      placeholder="admin@nexora.com"
+                    />
+                  </div>
+                  <div className="space-y-1">
+                    <label className="block text-xs font-medium text-muted uppercase tracking-wider">Password</label>
+                    <input
+                      type="password"
+                      required
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      className="block w-full rounded-[10px] border border-border bg-surface px-4 py-3 text-sm text-white focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary transition-colors"
+                      placeholder="••••••••••••"
+                    />
+                  </div>
+
+                  <div className="flex items-center pt-2">
+                    <input
+                      id="remember-me"
+                      name="remember-me"
+                      type="checkbox"
+                      defaultChecked
+                      className="h-4 w-4 rounded border-border bg-surface text-primary focus:ring-primary focus:ring-offset-black"
+                    />
+                    <label htmlFor="remember-me" className="ml-3 block text-sm text-muted">
+                      Keep me signed in
+                    </label>
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className="flex w-full items-center justify-center rounded-[10px] bg-primary px-4 py-3 text-sm font-semibold text-white transition hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-black disabled:opacity-60"
+                  >
+                    {loading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
+                    Sign in to Admin
+                  </button>
+                </form>
               </div>
             ) : null}
-            <input
-              type="text"
-              required
-              maxLength={6}
-              value={otpCode}
-              onChange={(e) => setOtpCode(e.target.value)}
-              className="w-full rounded-[10px] border border-border bg-black py-3 text-center font-mono text-2xl tracking-[0.4em] text-white"
-              placeholder="000000"
-              autoFocus
-            />
-            <button
-              type="submit"
-              disabled={loading}
-              className="inline-flex w-full items-center justify-center rounded-[10px] bg-primary px-4 py-2.5 text-sm font-medium text-white hover:bg-primary-hover disabled:opacity-60"
-            >
-              {loading ? (
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              ) : (
-                <ShieldCheck className="mr-2 h-4 w-4" />
-              )}
-              Verify
-            </button>
-            {step === "enroll" ? (
-              <button
-                type="button"
-                onClick={() => {
-                  router.replace(cmsPath());
-                }}
-                className="w-full text-sm text-muted hover:text-white"
-              >
-                Skip for now
-              </button>
+
+            {step === "enroll" || step === "verify" ? (
+              <form onSubmit={handleVerifyOtp} className="space-y-8">
+                <div>
+                  <h1 className="font-heading text-3xl font-bold tracking-tight text-white">
+                    {step === "enroll" ? "Set up MFA" : "Two-factor code"}
+                  </h1>
+                  <p className="mt-2 text-sm text-muted">
+                    {step === "enroll"
+                      ? "Scan the QR, then enter the 6-digit code."
+                      : "Enter the 6-digit code from your authenticator app."}
+                  </p>
+                </div>
+                {step === "enroll" && qrCodeSvg ? (
+                  <div className="flex flex-col items-center rounded-[12px] border border-border bg-surface p-6">
+                    <QrCode className="mb-4 h-6 w-6 text-muted" />
+                    <div
+                      className="rounded-lg bg-white p-3 shadow-sm"
+                      dangerouslySetInnerHTML={{ __html: qrCodeSvg }}
+                    />
+                  </div>
+                ) : null}
+                <div className="space-y-1">
+                  <input
+                    type="text"
+                    required
+                    maxLength={6}
+                    value={otpCode}
+                    onChange={(e) => setOtpCode(e.target.value)}
+                    className="block w-full rounded-[10px] border border-border bg-surface py-4 text-center font-mono text-3xl tracking-[0.5em] text-white focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary transition-colors"
+                    placeholder="000000"
+                    autoFocus
+                  />
+                </div>
+                <div className="space-y-3">
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className="flex w-full items-center justify-center rounded-[10px] bg-primary px-4 py-3 text-sm font-semibold text-white transition hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-black disabled:opacity-60"
+                  >
+                    {loading ? (
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    ) : (
+                      <ShieldCheck className="mr-2 h-4 w-4" />
+                    )}
+                    Verify Code
+                  </button>
+                  {step === "enroll" ? (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        router.replace(cmsPath());
+                      }}
+                      className="w-full rounded-[10px] border border-border bg-black px-4 py-3 text-sm font-medium text-muted transition hover:bg-surface hover:text-white"
+                    >
+                      Skip for now
+                    </button>
+                  ) : null}
+                </div>
+              </form>
             ) : null}
-          </form>
-        ) : null}
+          </div>
+        </div>
+      </div>
+
+      {/* Right Panel - 50% */}
+      <div className="relative hidden w-1/2 overflow-hidden border-l border-border bg-surface md:block">
+        <div
+          aria-hidden
+          className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(70,0,187,0.15),transparent_70%)]"
+        />
+        
+        <div className="absolute inset-0 z-0 opacity-[0.03]">
+          <svg className="absolute -right-[20%] top-[-10%] h-[120%] w-[120%] animate-[spin_240s_linear_infinite]" viewBox="0 0 100 100" fill="none">
+            {Array.from({ length: 40 }).map((_, i) => (
+              <circle
+                key={i}
+                cx="50"
+                cy="50"
+                r={10 + i * 2.5}
+                stroke="white"
+                strokeWidth={i % 3 === 0 ? "0.2" : "0.05"}
+                strokeDasharray={i % 5 === 0 ? "1 2" : "none"}
+              />
+            ))}
+          </svg>
+        </div>
+        
+        <div className="relative z-10 flex h-full flex-col justify-center px-12 lg:px-24">
+          <div className="max-w-lg">
+            <h2 className="mb-4 font-heading text-4xl font-bold tracking-tight text-white lg:text-5xl">
+              Content Management System
+            </h2>
+            <p className="text-lg leading-relaxed text-muted">
+              Securely manage your projects, content blocks, and media assets using the Nexora content pipeline.
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   );

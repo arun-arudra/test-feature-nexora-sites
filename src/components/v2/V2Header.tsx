@@ -35,20 +35,47 @@ export function V2Header() {
 
   function goToPage(href: string) {
     setOpen(false);
-    // Already on this page (or a child like /news/slug) → scroll to top
-    if (
-      pathname === href ||
-      (href !== "/" && pathname.startsWith(`${href}/`))
-    ) {
+    
+    const currentPath = pathname === "/" ? "/" : pathname.replace(/\/$/, "");
+    const targetPath = href === "/" ? "/" : href.replace(/\/$/, "");
+
+    if (currentPath === targetPath) {
       window.scrollTo({ top: 0, behavior: "smooth" });
-      router.refresh();
       return;
     }
+    
     router.push(href);
   }
 
   function isPageRoute(href: string) {
     return href === "/" || href === "/news" || href === "/work";
+  }
+
+  function handleLinkClick(e: React.MouseEvent<HTMLAnchorElement>, href: string) {
+    if (isPageRoute(href)) {
+      e.preventDefault();
+      goToPage(href);
+      return;
+    }
+
+    if (href.startsWith("/#") || href.startsWith("#")) {
+      const id = href.split("#")[1];
+      const element = document.getElementById(id);
+      
+      // If we are already on the page that has this element, manually scroll to it.
+      // This fixes the bug where clicking the same hash link twice does nothing.
+      if (element) {
+        e.preventDefault();
+        setOpen(false);
+        element.scrollIntoView({ behavior: "smooth" });
+        // Update the URL so it's shareable, without triggering Next.js routing
+        window.history.pushState(null, "", href);
+        return;
+      }
+    }
+
+    // Default fallback
+    setOpen(false);
   }
 
   return (
@@ -75,14 +102,7 @@ export function V2Header() {
             <Link
               key={item.href}
               href={item.href}
-              onClick={(e) => {
-                if (isPageRoute(item.href)) {
-                  e.preventDefault();
-                  goToPage(item.href);
-                } else {
-                  setOpen(false);
-                }
-              }}
+              onClick={(e) => handleLinkClick(e, item.href)}
               className="rounded-[10px] px-3 py-2 text-sm font-normal text-muted transition hover:bg-white/5 hover:text-white"
             >
               {item.label}
@@ -123,14 +143,7 @@ export function V2Header() {
             <Link
               key={item.href}
               href={item.href}
-              onClick={(e) => {
-                if (isPageRoute(item.href)) {
-                  e.preventDefault();
-                  goToPage(item.href);
-                } else {
-                  setOpen(false);
-                }
-              }}
+              onClick={(e) => handleLinkClick(e, item.href)}
               className="block rounded-[10px] px-3 py-3 text-sm text-white"
             >
               {item.label}

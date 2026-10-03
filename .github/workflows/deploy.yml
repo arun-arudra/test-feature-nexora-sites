@@ -61,10 +61,10 @@ jobs:
         env:
           # This triggers the output: "export" in next.config.ts
           BUILD_TARGET: "static"
-          NEXT_PUBLIC_BASE_PATH: "/Nexora"
+          NEXT_PUBLIC_BASE_PATH: ""
           
           # Add all your necessary NEXT_PUBLIC_ variables here
-          NEXT_PUBLIC_SITE_URL: "https://hjt.iyk.mybluehostin.me/Nexora"
+          NEXT_PUBLIC_SITE_URL: "https://nestwebs.com"
           NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
           NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
           NEXT_PUBLIC_CMS_ADMIN_BASE: "/admin"
@@ -82,6 +82,6 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: ./Nexora/
+          server-dir: ./nestwebs.com/
           local-dir: ./out/
           dangerous-clean-slate: true # Removes old files on the server

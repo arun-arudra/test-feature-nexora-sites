@@ -10,6 +10,7 @@ const cmsBase = cmsAdminBase();
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
+  compress: false, // Let Cloudflare handle compression to avoid Next.js decoding errors
 
   turbopack: {
     root: __dirname,

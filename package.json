@@ -13,7 +13,9 @@
     "@contentful/rich-text-types": "^17.2.7",
     "@supabase/ssr": "^0.12.7",
     "@supabase/supabase-js": "^2.116.0",
+    "cheerio": "^1.2.0",
     "clsx": "^2.1.1",
+    "contentful-management": "^12.19.0",
     "framer-motion": "^13.2.0",
     "lucide-react": "^1.45.0",
     "next": "16.3.5",
@@ -22,6 +24,7 @@
     "react-easy-crop": "^6.2.3",
     "react-quill-new": "^3.8.3",
     "resend": "^6.30.0",
+    "tsx": "^4.23.15",
     "zod": "^4.6.5"
   },
   "devDependencies": {
