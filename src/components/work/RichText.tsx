@@ -16,19 +16,27 @@ const options = {
       </p>
     ),
     [BLOCKS.HEADING_1]: (_: unknown, children: React.ReactNode) => (
-      <h2 className="mb-4 mt-8 font-heading text-[clamp(1.4rem,2.2vw,1.9rem)] font-normal tracking-[-0.02em] text-white first:mt-0 leading-[1.15]">
-        {children}
-      </h2>
+      <div className="md:col-span-3">
+        <h2 className="mb-4 mt-8 font-heading text-[clamp(1.4rem,2.2vw,1.9rem)] font-normal tracking-[-0.02em] text-white first:mt-0 leading-[1.15]">
+          {children}
+        </h2>
+        <span className="neon-line mt-5 block h-px w-10" aria-hidden />
+      </div>
     ),
     [BLOCKS.HEADING_2]: (_: unknown, children: React.ReactNode) => (
-      <h2 className="mb-4 mt-8 font-heading text-[clamp(1.4rem,2.2vw,1.9rem)] font-normal tracking-[-0.02em] text-white first:mt-0 leading-[1.15]">
-        {children}
-      </h2>
+      <div className="md:col-span-3">
+        <h2 className="mb-4 mt-8 font-heading text-[clamp(1.4rem,2.2vw,1.9rem)] font-normal tracking-[-0.02em] text-white first:mt-0 leading-[1.15]">
+          {children}
+        </h2>
+        <span className="neon-line mt-5 block h-px w-10" aria-hidden />
+      </div>
     ),
     [BLOCKS.HEADING_3]: (_: unknown, children: React.ReactNode) => (
-      <h3 className="mb-4 mt-8 text-[11px] font-normal uppercase tracking-[0.18em] text-primary first:mt-0">
-        {children}
-      </h3>
+      <div className="md:col-span-3">
+        <h3 className="mb-4 mt-8 text-[11px] font-normal uppercase tracking-[0.18em] text-primary first:mt-0">
+          {children}
+        </h3>
+      </div>
     ),
     [BLOCKS.UL_LIST]: (_: unknown, children: React.ReactNode) => (
       <ul className="mb-5 space-y-2 pl-0">{children}</ul>
@@ -79,7 +87,7 @@ export function RichText({
   // This uses CSS grid where H2/H3 elements go into the left column (grid-column: 1)
   // and all other elements go into the right column (grid-column: 2) on large screens.
   const gridClasses = prose
-    ? "md:grid md:grid-cols-12 md:gap-x-12 lg:gap-x-16 md:[&>h2]:col-span-3 md:[&>h3]:col-span-3 md:[&>p]:col-start-4 md:[&>p]:col-span-9 md:[&>ul]:col-start-4 md:[&>ul]:col-span-9 md:[&>blockquote]:col-start-4 md:[&>blockquote]:col-span-9"
+    ? "md:grid md:grid-cols-12 md:gap-x-12 lg:gap-x-12 md:[&>p]:col-start-4 md:[&>p]:col-span-7 md:[&>ul]:col-start-4 md:[&>ul]:col-span-7 md:[&>blockquote]:col-start-4 md:[&>blockquote]:col-span-7"
     : "";
 
   if (typeof value === "string") {

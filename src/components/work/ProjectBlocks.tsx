@@ -23,10 +23,10 @@ function Block({ block, index }: { block: ProjectBlock; index: number }) {
       // 3-col label / 9-col body layout (ulrychkristian style)
       return (
         <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-6 md:grid-cols-12 md:gap-16">
+          <div className="grid gap-6 md:grid-cols-12 md:gap-12">
             <div className="md:col-span-3">
               {block.eyebrow && (
-                <p className="mb-2 text-[10px] font-normal uppercase tracking-[0.18em] text-primary">
+                <p className="mb-3 text-[10px] font-normal uppercase tracking-[0.18em] text-primary">
                   {block.eyebrow}
                 </p>
               )}
@@ -35,7 +35,7 @@ function Block({ block, index }: { block: ProjectBlock; index: number }) {
                   {block.heading}
                 </h2>
               )}
-              <span className="neon-line mt-4 block h-px w-10" aria-hidden />
+              <span className="neon-line mt-5 block h-px w-10" aria-hidden />
             </div>
             <div className="md:col-span-7 md:col-start-4">
               <RichText value={block.body} />
