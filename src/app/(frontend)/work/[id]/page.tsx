@@ -62,7 +62,7 @@ export default async function WorkProjectPage({ params }: Props) {
           aria-hidden
         />
 
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
           {/* Back link */}
           <Link
@@ -104,7 +104,7 @@ export default async function WorkProjectPage({ params }: Props) {
 
         {/* ── Hero cover image ── */}
         {(project.image || project.videoDesktop || project.videoUrl) && (
-          <div className="mt-14 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="relative z-10 mt-14 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="overflow-hidden rounded-[12px] border border-border aspect-[16/9] w-full bg-surface">
               {project.image ? (
                 // eslint-disable-next-line @next/next/no-img-element
@@ -129,7 +129,7 @@ export default async function WorkProjectPage({ params }: Props) {
 
         {/* If no media, show a gradient placeholder */}
         {!project.image && !project.videoDesktop && !project.videoUrl && (
-          <div className="mt-14 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="relative z-10 mt-14 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div
               className="overflow-hidden rounded-[12px] border border-border aspect-[16/9] w-full"
               style={{

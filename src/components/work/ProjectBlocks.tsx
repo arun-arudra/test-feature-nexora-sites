@@ -17,30 +17,38 @@ export function ProjectBlocks({ blocks }: { blocks: ProjectBlock[] }) {
 
 function Block({ block, index }: { block: ProjectBlock; index: number }) {
   if (block.type === "text") {
-    return (
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid gap-6 md:grid-cols-12 md:gap-12">
-          {/* Left: section heading */}
-          <div className="md:col-span-3">
-            {block.eyebrow && (
-              <p className="mb-2 text-[10px] font-normal uppercase tracking-[0.18em] text-primary">
-                {block.eyebrow}
-              </p>
-            )}
-            {block.heading && (
-              <h2 className="font-heading text-[clamp(1.4rem,2.2vw,1.9rem)] font-normal leading-[1.15] tracking-[-0.02em] text-white">
-                {block.heading}
-              </h2>
-            )}
-            {!block.heading && !block.eyebrow && null}
-            <span className="neon-line mt-4 block h-px w-10" aria-hidden />
-          </div>
+    const hasLabel = !!(block.heading || block.eyebrow);
 
-          {/* Right: body content */}
-          <div className="md:col-span-7 md:col-start-4">
-            <RichText value={block.body} />
+    if (hasLabel) {
+      // 3-col label / 9-col body layout (ulrychkristian style)
+      return (
+        <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid gap-6 md:grid-cols-12 md:gap-16">
+            <div className="md:col-span-3">
+              {block.eyebrow && (
+                <p className="mb-2 text-[10px] font-normal uppercase tracking-[0.18em] text-primary">
+                  {block.eyebrow}
+                </p>
+              )}
+              {block.heading && (
+                <h2 className="font-heading text-[clamp(1.4rem,2.2vw,1.9rem)] font-normal leading-[1.15] tracking-[-0.02em] text-white">
+                  {block.heading}
+                </h2>
+              )}
+              <span className="neon-line mt-4 block h-px w-10" aria-hidden />
+            </div>
+            <div className="md:col-span-7 md:col-start-4">
+              <RichText value={block.body} />
+            </div>
           </div>
-        </div>
+        </section>
+      );
+    }
+
+    // No label: clean prose column (headings inside body act as section breaks)
+    return (
+      <section className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+        <RichText value={block.body} />
       </section>
     );
   }
@@ -51,10 +59,10 @@ function Block({ block, index }: { block: ProjectBlock; index: number }) {
       <section
         className={cn(
           "mx-auto px-4 sm:px-6 lg:px-8",
-          block.wide ? "max-w-6xl" : "max-w-4xl",
+          block.wide ? "max-w-7xl" : "max-w-5xl",
         )}
       >
-        <div className="overflow-hidden rounded-[1.25rem] border border-border bg-surface">
+        <div className="overflow-hidden rounded-[12px] border border-border bg-surface">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={block.src}
@@ -63,7 +71,7 @@ function Block({ block, index }: { block: ProjectBlock; index: number }) {
           />
         </div>
         {block.caption ? (
-          <p className="mt-3 text-center text-sm text-muted">{block.caption}</p>
+          <p className="mt-3 text-center text-sm font-light text-muted">{block.caption}</p>
         ) : null}
       </section>
     );
